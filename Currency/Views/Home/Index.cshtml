@@ -1,0 +1,141 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Source Currency</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        legend {
+            text-align: center;
+        }
+
+        .d1 {
+            margin: 10px;
+        }
+
+        label {
+            display: block;
+            font-weight: 500;
+            font-family: 'Times New Roman', Times, serif;
+            margin-bottom: 1px;
+
+        }
+
+        .selWidth {
+            width: 100%;
+            height: 40px;
+            border-radius: 10px;
+            text-decoration: none;
+            outline: none;
+            padding: 0px 10px;
+        }
+
+        .d1 input {
+            border: 1px solid black;
+        }
+
+        .btnCon {
+            width: 80px;
+            height: 40px;
+            border-radius: 30px;
+            background-color: green;
+            color: wheat;
+        }
+
+        .btnCon:hover {
+            background-color: aqua;
+            color: black;
+        }
+
+        .btnRes {
+            width: 80px;
+            height: 40px;
+            border-radius: 30px;
+            background-color: yellow;
+            color: black;
+        }
+
+        .btnRes:hover {
+            background-color: aqua;
+            color: black;
+        }
+
+        .errors {
+            background-color: whitesmoke;
+            color: red;
+            font-size: 40px;
+        }
+    </style>
+    <script>
+        function showData() {
+            if ("@ViewBag.SelectShowOne" != "") {
+                document.getElementById("selOneId").value = "@ViewBag.SelectShowOne";
+            }
+            if ("@ViewBag.SelectShowTwo" != "") {
+                document.getElementById("selTwoId").value = "@ViewBag.SelectShowTwo";
+            }
+            if ("@ViewBag.amountShow" != 0) {
+                document.getElementById("amountId").value = "@ViewBag.amountShow";
+            }
+        }
+    </script>
+</head>
+
+<body onload="showData()">
+    <form action="/Home/Index" method="post">
+        <fieldset>
+            <legend>Currency Convertor V2</legend>
+            <div class="d1">
+                <label>Source Currency</label>
+                <select class="selWidth" name="selectCurrencyV1" id="selOneId">
+                    <option value="">-Select Currency One-</option>
+                    <option value="1">US Dollar</option>
+                    <option value="2">SG Dollar</option>
+                    <option value="3">Thailand Baht</option>
+                    <option value="4">Myanmar Kyat</option>
+                </select>
+            </div>
+            <div class="d1">
+                <label>Designation Currency</label>
+                <select class="selWidth" name="selectCurrencyV2" id="selTwoId">
+                    <option value="">-Select Currency One-</option>
+                    <option value="1">US Dollar</option>
+                    <option value="2">SG Dollar</option>
+                    <option value="3">Thailand Baht</option>
+                    <option value="4">Myanmar Kyat</option>
+                </select>
+            </div>
+            <div class="d1">
+                <label>Amount : </label>
+                <input type="number" class="selWidth" placeholder="Number of Amount" name="amount" id="amountId"
+                    required />
+            </div>
+            <div class="d1">
+                <label>Result : </label>
+                <input type="number" class="selWidth" value="@ViewBag.Ans" readonly />
+            </div>
+            <div class="d1">
+                <input type="submit" value="Convert" class="btnCon" />
+                <input type="submit" value="Reset" class="btnRes"  />
+            </div>
+        </fieldset>
+        <div class="errors">
+            <ul>
+                @if (ViewBag.Errors != null)
+                {
+                @foreach (var e in ViewBag.Errors)
+                {
+                <li>@e</li>
+                }
+                }
+            </ul>
+        </div>
+    </form>
+
+</body>
+
+</html>
