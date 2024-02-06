@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0 auto;
+            width: 500px;
+        }
+
+        fieldset {
+            background-color: ghostwhite;
+            border-radius: 15px;
+        }
+
+        legend {
+            text-align: center;
+            font-style: italic;
+            font-weight: bold;
+            
+        }
+    </style>
+    <script type="text/javascript">
+        function showData() { 
+            if ("@ViewBag.Name" != null) { 
+                document.getElementById("NameId").value = "@ViewBag.Name";
+            }
+            if ("@ViewBag.Email" != null) {
+                document.getElementById("EmailId").value = "@ViewBag.Email";
+            }
+            if ("@ViewBag.Password" != null) {
+                document.getElementById("PasswordId").value = "@ViewBag.Password";
+            }
+            if ("@ViewBag.ConfirmPassword" != null) { 
+                document.getElementById("ConfirmPasswordId").value = "@ViewBag.ConfirmPassword";
+            }
+            if ("@ViewBag.DateBirth" != null) { 
+                document.getElementById("DateId").value = "@ViewBag.DateBirth";
+            }
+            if ("@ViewBag.City" != null) { 
+                document.getElementById("City").value = "@ViewBag.City";
+            }
+            if ("@ViewBag.Adress" != null) {
+                document.getElementById("AdressId").value = "@ViewBag.Adress";
+            }
+            
+        }
+    </script>
+    
+</head>
+
+<body onload="showData()">
+   <form action="/Home/index" method="post">
+        <fieldset>
+            <legend>Register Here</legend>
+            <div class="main-Container">
+                <div class="mb-3">
+                    <label for="Name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="NameId" placeholder="Write your Name" name="Name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="Email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="EmailId" placeholder="Write your Eamil" name="Email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="Password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="PasswordId" placeholder="Write your Password" name="Password" required>
+                </div>
+                <div class="mb-3">
+                    <label for="ConfirmPassword" class="form-label">ConfirmPassword</label>
+                    <input type="password" class="form-control" id="ConfirmPasswordId" placeholder="Write your ConfirmPassword" name="ConfirmPassword" required>
+                </div>
+                <label class="form-label">Gender</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="Gender" value="true" id="Male">
+                    <label class="form-check-label"> Male</label>
+                    <input class="form-check-input" type="radio" name="Gender" value="true" id="FeMale" checked>
+                    <label class="form-check-label"> Female</label>
+                </div>
+                <div class="mb-3">
+                    <label for="Date of Birth" class="form-label">Date of Birth</label>
+                    <input type="date" class="form-control" id="DateId" placeholder="Date of Birth" required>
+                </div>
+                <select class="form-select" name="City" id="City">
+                    <option selected>-Select your City-</option>
+                    <option value="1">Yangon</option>
+                    <option value="2">Mandalay</option>
+                    <option value="3">Pyin Oo Lwin</option>
+                </select>
+                <br />
+                <div class="form-floating">
+                    <textarea class="form-control" placeholder="Your adress here" name="Adress" id="AdressId"required></textarea>
+                    <label>Adress</label>
+                </div>
+                <br />
+                <div class="mb-3">
+                <label for="Result" class="form-label" style="background-color:bisque">@ViewBag.Restlt</label>
+                </div>
+                  <input type="submit" id="btnClick" value="Click"/>
+            </div>
+        </fieldset>
+   </form>
+       
+</body>
+
+</html>
