@@ -1,0 +1,145 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Incoming</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0 auto;
+            width: 750px;
+            text-align: center;
+        }
+
+        .firstContainer {
+            background-color: rgb(144, 164, 234);
+            padding: 10px;
+            font-size: 18px;
+            border-radius: 10px;
+        }
+
+        .secContainer {
+            background-color: aquamarine;
+            padding: 10px;
+            font-size: 17px;
+            border-radius: 20px;
+        }
+
+        .form-control {
+            width: 45%;
+            margin-left: 20px;
+            display: inline;
+        }
+
+        .chDiv {
+            position: relative;
+            left: 40px;
+            padding-bottom: 10px;
+        }
+
+        .ch {
+            width: 15px;
+            height: 15px;
+            padding-right: 5px;
+        }
+
+        .raDiv {
+            position: relative;
+            right: 90px;
+            padding-bottom: 10px;
+        }
+
+        .btnDiv {
+            padding-bottom: 10px;
+        }
+
+        #btn {
+            position: relative;
+            left: 200px;
+            padding: 15px;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+</head>
+
+<body>
+    <div>
+        <div class="firstContainer">
+            <div id="notgiven">သင်အခွန်ပေးဆောင်ရန်မလိုသေးပါ</div>
+
+            <div id="given" style="display:none">သင်ပေးဆောင်ရမည့် အခွန်ငွေမှာ တစ်လလျှင်<label id="Ans"></label> ကျပ်ဖြစ်ပါသည်</div>
+        </div>
+        <div class="secContainer">
+            <div class="mb-3">
+                <label for="Amount" class="form-label">တစ်လဝင်ငွေ(ကျပ်)</label>
+                <input type="number" class="form-control" id="amountId" placeholder="" name="amount">
+            </div>
+            <div class="chDiv">
+                <input type="checkbox" value="50000" class="fId" name="father"> အတူနေအဘ
+                <input type="checkbox" value="50000" class="mId" name="mother"> အတူနေအမိ
+            </div>
+            <div class="raDiv">
+                <label style="margin-right: 30px;">အိမ်ထောင်</label>
+                <input class="" type="radio" name="Married" value="30000" onclick="show(0)" id="mrId"> ရှိ
+                <input class="" type="radio" name="Married" id="NId" onclick="show(1)" checked> မရှိ
+            </div>
+            <div class="mb-3" id="childrenId" style="display:none">
+                <label for="Children" class="form-label">သားသမီး</label>
+                <input type="number" class="form-control" placeholder="" name="children" id="chrId">
+            </div>
+            <div class="btnDiv">
+                <button type="submit" class="btn btn-info" id="btn">တွက်ချက်ပါ</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        function show(x) {
+            if (x === 1) {
+                document.getElementById("childrenId").style.display = "none";
+            }
+            else {
+                document.getElementById("childrenId").style.display = "block";
+            }
+        }
+        $("#btn").click(function () {
+            var url = "/Home/index";
+            var ta = {}
+            ta.amount = $("#amountId").val();
+            ta.father = $(".fId:checked").val();
+            ta.mother = $(".mId:checked").val();
+            ta.married = $("#mrId:checked").val();
+            ta.Children = $("#chrId").val();
+            $.ajax(
+                {
+                    url: url,
+                    data: ta,
+                    method: "Post",
+                    success: function (res) {
+                        var total = JSON.stringify(res);
+                        $("#Ans").html(total)
+                        if (total > 0) {
+                            document.getElementById("notgiven").style.display = "none"
+                            document.getElementById("given").style.display = "block"
+                        }
+                        else {
+                            document.getElementById("notgiven").style.display = "block"
+                            document.getElementById("given").style.display = "none"
+                        }
+                    },
+                    failure: function (er) {
+                        console.log9(er)
+                    }
+                }
+            )
+        });
+    </script>
+</body>
+
+</html>
